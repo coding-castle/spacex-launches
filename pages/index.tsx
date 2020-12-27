@@ -1,9 +1,7 @@
-import Layout from "../components/Layout"
+import { getLayout } from "../components/Layout/Base"
 
-const IndexPage = () => (
-	<Layout title="Home | Next.js + TypeScript Example">
-		<h1 className="text-red-500">Hello Next.js 👋</h1>
-	</Layout>
-)
+export default function Index() {
+	return <h1 className="text-red-500">Hello Next.js 👋</h1>
+}
 
-export default IndexPage
+;(Index as any).getLayout = getLayout
