@@ -1,5 +1,5 @@
 import { getLayout } from "../components/Layout/Base"
-import PostList, { allPostsQueryVars, ALL_POSTS_QUERY } from "../components/PostList"
+import PostList, { UPCOMING_LAUNCHES_QUERY } from "../components/PostList"
 import { addApolloState, initializeApollo } from "../lib/ApolloClient"
 
 export default function Index() {
@@ -17,8 +17,7 @@ export async function getStaticProps() {
 	const apolloClient = initializeApollo()
 
 	await apolloClient.query({
-		query: ALL_POSTS_QUERY,
-		variables: allPostsQueryVars,
+		query: UPCOMING_LAUNCHES_QUERY,
 	})
 
 	return addApolloState(apolloClient, {

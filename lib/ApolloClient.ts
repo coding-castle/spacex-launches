@@ -3,18 +3,21 @@ import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client"
 import { concatPagination } from "@apollo/client/utilities"
 import merge from "deepmerge"
 import isEqual from "lodash/isEqual"
+import { RestLink } from "apollo-link-rest"
 
 export const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__"
 
 let apolloClient: ApolloClient<any>
 
+const restLink = new RestLink({ uri: "https://api.spacexdata.com/v4/" })
+
 function createApolloClient() {
 	return new ApolloClient({
 		ssrMode: typeof window === "undefined",
-		link: new HttpLink({
-			uri: "https://nextjs-graphql-with-prisma-simple.vercel.app/api", // Server URL (must be absolute)
-			credentials: "same-origin", // Additional fetch() options like `credentials` or `headers`
-		}),
+		// link: new HttpLink({
+		// 	uri: "https://nextjs-graphql-with-prisma-simple.vercel.app/api", // Server URL (must be absolute)
+		// 	credentials: "same-origin", // Additional fetch() options like `credentials` or `headers`
+		// }),
 		cache: new InMemoryCache({
 			typePolicies: {
 				Query: {
@@ -24,6 +27,7 @@ function createApolloClient() {
 				},
 			},
 		}),
+		link: restLink,
 	})
 }
 
