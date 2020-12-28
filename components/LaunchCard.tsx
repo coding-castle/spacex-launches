@@ -1,21 +1,15 @@
-import clsx from "clsx"
-import { Precision, useUpcomingLaunchesQuery } from "../lib/generated/graphql"
-import {
-	format,
-	formatDistanceToNow,
-	formatDistanceStrict,
-	formatDistanceToNowStrict,
-} from "date-fns"
-import Rocket from "./Rockets/Rocket"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
 	faCircleNotch,
 	faPlaneArrival,
 	faRocket,
 	faSatellite,
-	faWeight,
 	faWeightHanging,
 } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import clsx from "clsx"
+import { format } from "date-fns"
+import { Precision, useUpcomingLaunchesQuery } from "../lib/generated/graphql"
+import Rocket from "./Rockets/Rocket"
 
 type Props = {
 	variant: "compact" | "wide"
@@ -24,7 +18,7 @@ type Props = {
 }
 
 export default function LaunchCard({ variant, index, className }: Props) {
-	const { loading, error, data } = useUpcomingLaunchesQuery()
+	const { data } = useUpcomingLaunchesQuery()
 
 	const launch = data?.upcomingLaunches[index]!
 	const rocket = data?.rockets.find((r) => r.id === launch.rocket)

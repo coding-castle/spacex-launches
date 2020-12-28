@@ -1,4 +1,3 @@
-import { faBook, faHome, faSearch } from "@fortawesome/free-solid-svg-icons"
 import Link from "next/link"
 import { NavItem } from "../../lib/interfaces"
 import NavButton from "./NavButton"

@@ -1,10 +1,10 @@
-import { useMemo } from "react"
-import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client"
+import { ApolloClient, InMemoryCache } from "@apollo/client"
 import { concatPagination } from "@apollo/client/utilities"
-import merge from "deepmerge"
-import isEqual from "lodash/isEqual"
 import { RestLink } from "apollo-link-rest"
 import camelCase from "camelcase"
+import merge from "deepmerge"
+import isEqual from "lodash/isEqual"
+import { useMemo } from "react"
 
 export const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__"
 

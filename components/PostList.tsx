@@ -6,8 +6,6 @@ export default function PostList() {
 	if (error) return <div>Error Loading Posts...</div>
 	if (loading) return <div>Loading</div>
 
-	console.log("GOT DATA", data)
-
 	return (
 		<section>
 			<ul>

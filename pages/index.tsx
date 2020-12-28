@@ -1,10 +1,9 @@
-import { getLayout } from "../components/Layout/Base"
-import PostList from "../components/PostList"
+import { formatDistanceToNow } from "date-fns"
 import Head from "next/head"
+import LaunchCard from "../components/LaunchCard"
+import { getLayout } from "../components/Layout/Base"
 import { addApolloState, initializeApollo } from "../lib/ApolloClient"
 import { UpcomingLaunchesDocument, useUpcomingLaunchesQuery } from "../lib/generated/graphql"
-import LaunchCard from "../components/LaunchCard"
-import { format, formatDistanceToNow } from "date-fns"
 
 export default function Index() {
 	const { loading, error, data } = useUpcomingLaunchesQuery()
@@ -16,7 +15,6 @@ export default function Index() {
 		includeSeconds: true,
 	})
 
-	console.log("GOT DATA", data)
 	return (
 		<>
 			<Head>
