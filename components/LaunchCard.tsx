@@ -29,7 +29,7 @@ export default function LaunchCard({ variant, index, className }: Props) {
 	const launch = data?.upcomingLaunches[index]!
 	const rocket = data?.rockets.find((r) => r.id === launch.rocket)
 	const payload = data?.payloads.find((p) => p.id === launch.payloads?.[0]!)
-	// const date = format(new Date(launch.dateUtc), "HH:mm dd.MM.yyy")
+
 	let date: string
 	if (launch.datePrecision === Precision.Hour) {
 		date = `at ${format(new Date(launch.dateUtc), "HH:mm dd.MM.yyy")}`
@@ -90,7 +90,7 @@ export default function LaunchCard({ variant, index, className }: Props) {
 						)}
 					</div>
 					<div className="">
-						Launching <span className="font-bold underline">{date}</span>
+						Launching <span className="font-bold underline">{date!}</span>
 					</div>
 				</div>
 				{/* <div className="flex flex-col">Second Col</div> */}
