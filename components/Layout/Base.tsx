@@ -1,5 +1,4 @@
 import { ReactNode } from "react"
-import Navbar from "../Sidenav/Navlist"
 
 type Props = {
 	children: ReactNode
@@ -7,9 +6,8 @@ type Props = {
 
 export default function SiteLayout({ children }: Props) {
 	return (
-		<div className="bg-gray-800 antialiased h-screen flex flex-row">
-			<Navbar />
-			<div className="flex-1 text-gray-100">{children}</div>
+		<div className="bg-gray-800 antialiased h-screen flex flex-col">
+			<div className="flex-1 text-gray-100 container mx-auto">{children}</div>
 		</div>
 	)
 }

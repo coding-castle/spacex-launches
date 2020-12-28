@@ -4,12 +4,16 @@ import { concatPagination } from "@apollo/client/utilities"
 import merge from "deepmerge"
 import isEqual from "lodash/isEqual"
 import { RestLink } from "apollo-link-rest"
+import camelCase from "camelcase"
 
 export const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__"
 
 let apolloClient: ApolloClient<any>
 
-const restLink = new RestLink({ uri: "https://api.spacexdata.com/v4/" })
+const restLink = new RestLink({
+	uri: "https://api.spacexdata.com/v4/",
+	fieldNameNormalizer: (key: string) => camelCase(key),
+})
 
 function createApolloClient() {
 	return new ApolloClient({

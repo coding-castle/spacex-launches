@@ -1,0 +1,18 @@
+query UpcomingLaunches {
+	upcomingLaunches @rest(type: "Launch", path: "launches/upcoming") {
+		id
+		name
+		flightNumber
+		datePrecision
+		rocket
+		dateUtc
+		dateUnix
+		dateLocal
+		details
+	}
+	rockets @rest(type: "Rocket", path: "rockets") {
+		id
+		name
+		type
+	}
+}

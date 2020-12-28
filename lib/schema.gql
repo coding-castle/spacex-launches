@@ -1,0 +1,315 @@
+type Query {
+	upcomingLaunches: [Launch!]!
+	launches: [Launch!]!
+	cores: [Core!]!
+	launchpads: [Launchpad!]!
+	landpads: [Landpad!]!
+	payloads: [Payload!]!
+	rockets: [Rocket!]!
+}
+
+# Launch
+
+type Launch {
+	id: ID!
+	name: String!
+	flightNumber: Int!
+	dateUtc: String!
+	dateUnix: String!
+	dateLocal: String!
+	datePrecision: Precision!
+	staticFireDateUtc: String
+	staticFireDateUnix: String
+	tdb: Boolean!
+	net: Boolean!
+	window: Int
+	rocket: ID
+	success: Boolean
+	failures: [Failure!]!
+	upcoming: Boolean!
+	details: String
+	fairings: Fairing
+	crew: [ID]
+	ships: [ID]
+	capsules: [ID]
+	payloads: [ID]
+	launchpad: ID
+	cores: [Core!]!
+	links: Links!
+	autoUpdate: Boolean!
+}
+
+type Links {
+	patch: Patch!
+	reddit: Reddit!
+	flickr: Flickr!
+	presskit: String
+	webcast: String
+	youtubeId: String
+	article: String
+	wikipedia: String
+}
+
+type Flickr {
+	small: [String!]!
+	original: [String!]!
+}
+
+type Reddit {
+	campaign: String
+	launch: String
+	media: String
+	recovery: String
+}
+
+type Patch {
+	small: String
+	large: String
+}
+
+type Core {
+	core: ID
+	flight: Int
+	gridfins: Boolean
+	legs: Boolean
+	reused: Boolean
+	landingAttempt: Boolean
+	landingSuccess: Boolean
+	landingType: String
+	landpad: ID
+}
+
+type Fairing {
+	reused: Boolean
+	recoveryAttempt: Boolean
+	recovered: Boolean
+	ships: [String]
+}
+
+type Failure {
+	time: Float!
+	altitude: Float!
+	reason: String!
+}
+
+enum Precision {
+	half
+	quarter
+	year
+	month
+	day
+	hour
+}
+
+# Rocket
+
+type PayloadWeights {
+	id: String
+	name: String
+	kg: Int
+	lb: Int
+}
+
+type LandingLegs {
+	number: Int
+	material: String
+}
+
+type ThrustVacuum {
+	kN: Int
+	lbf: Int
+}
+
+type ThrustSeaLevel {
+	kN: Int
+	lbf: Int
+}
+
+type Isp {
+	seaLevel: Int
+	vacuum: Int
+}
+
+type Engines {
+	number: Int
+	type: String
+	version: String
+	layout: String
+	engineLossMax: Int
+	propellant1: String
+	propellant2: String
+	thrustToWeight: Float
+	thrustVacuum: ThrustVacuum
+	thrustSeaLevel: ThrustSeaLevel
+	isp: Isp
+}
+
+type Diameter {
+	meters: Float
+	feet: Float
+}
+
+type Height {
+	meters: Float
+	feet: Int
+}
+
+type CompositeFairing {
+	diameter: Diameter
+	height: Height
+}
+
+type Payloads {
+	option1: String
+	compositeFairing: CompositeFairing
+}
+
+type Thrust {
+	kN: Int
+	lbf: Int
+}
+
+type SecondStage {
+	reusable: Boolean
+	engines: Int
+	fuelAmountTons: Int
+	burnTimeSec: Int
+	payloads: Payloads
+	thrust: Thrust
+}
+
+type FirstStage {
+	reusable: Boolean
+	engines: Int
+	fuelAmountTons: Int
+	burnTimeSec: Int
+	thrustVacuum: ThrustVacuum
+	thrustSeaLevel: ThrustSeaLevel
+}
+
+type Mass {
+	kg: Int
+	lb: Int
+}
+
+type Rocket {
+	name: String
+	type: String
+	active: Boolean
+	stages: Int
+	boosters: Int
+	costPerLaunch: Int
+	successRatePct: Int
+	firstFlight: String
+	country: String
+	company: String
+	wikipedia: String
+	description: String
+	id: String
+	flickrImages: [String]!
+	payloadWeights: [PayloadWeights]!
+	landingLegs: LandingLegs
+	engines: Engines
+	secondStage: SecondStage
+	firstStage: FirstStage
+	mass: Mass
+	diameter: Diameter
+	height: Height
+}
+
+# Payload
+
+type Dragon {
+	capsule: String
+	massReturnedKg: String
+	massReturnedLbs: String
+	flightTimeSec: String
+	manifest: String
+	waterLanding: String
+	landLanding: String
+}
+
+type Payload {
+	name: String
+	type: String
+	reused: Boolean
+	launch: String
+	massKg: Int
+	massLbs: Int
+	orbit: String
+	referenceSystem: String
+	regime: String
+	longitude: String
+	semiMajorAxisKm: String
+	eccentricity: String
+	periapsisKm: Int
+	apoapsisKm: Int
+	inclinationDeg: Int
+	periodMin: String
+	lifespanYears: String
+	epoch: String
+	meanMotion: String
+	raan: String
+	argOfPericenter: String
+	meanAnomaly: String
+	id: String
+	manufacturers: [String]!
+	nationalities: [String]!
+	noradIds: [String]!
+	customers: [String]!
+	dragon: Dragon
+}
+
+# Launchpad
+
+type Launchpad {
+	name: String
+	fullName: String
+	locality: String
+	region: String
+	timezone: String
+	latitude: Float
+	longitude: Float
+	launchAttempts: Int
+	launchSuccesses: Int
+	details: String
+	status: String
+	id: String
+	launches: [String]!
+	rockets: [String]!
+}
+
+# Core
+
+type Core {
+	block: Int
+	reuseCount: Int
+	rtlsAttempts: Int
+	rtlsLandings: Int
+	asdsAttempts: Int
+	asdsLandings: Int
+	lastUpdate: String
+	serial: String
+	status: String
+	id: String
+	launches: [String]!
+}
+
+# Landpads
+
+type Landpad {
+	name: String
+	fullName: String
+	type: String
+	locality: String
+	region: String
+	latitude: Float
+	longitude: Float
+	landingAttempts: Int
+	landingSuccesses: Int
+	wikipedia: String
+	details: String
+	status: String
+	id: String
+	launches: [String]!
+}

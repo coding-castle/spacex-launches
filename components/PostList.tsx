@@ -1,15 +1,7 @@
-import { gql, useQuery, NetworkStatus } from "@apollo/client"
-
-export const UPCOMING_LAUNCHES_QUERY = gql`
-	query Luke {
-		launches @rest(type: "Launch", path: "launches/upcoming") {
-			name
-		}
-	}
-`
+import { Precision, useUpcomingLaunchesQuery } from "../lib/generated/graphql"
 
 export default function PostList() {
-	const { loading, error, data } = useQuery(UPCOMING_LAUNCHES_QUERY)
+	const { loading, error, data } = useUpcomingLaunchesQuery()
 
 	if (error) return <div>Error Loading Posts...</div>
 	if (loading) return <div>Loading</div>
@@ -19,11 +11,14 @@ export default function PostList() {
 	return (
 		<section>
 			<ul>
-				{data.launches.map((launch: any, index: any) => (
-					<li key={launch.name}>
+				{data?.upcomingLaunches.map((launch) => (
+					<li key={launch.id}>
 						<div>
-							<span>{index + 1}. </span>
+							<span>
+								{launch.datePrecision === Precision.Day ? "day" : "not day"}.{" "}
+							</span>
 							<a>{launch.name}</a>
+							<a>Rocket: {data.rockets.find((r) => r.id === launch.rocket)?.name}</a>
 						</div>
 					</li>
 				))}
