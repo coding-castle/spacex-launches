@@ -1,4 +1,5 @@
 import { ReactNode } from "react"
+import Header from "../Header/Index"
 
 type Props = {
 	children: ReactNode
@@ -6,8 +7,9 @@ type Props = {
 
 export default function SiteLayout({ children }: Props) {
 	return (
-		<div className="bg-gray-800 antialiased h-screen flex flex-col">
-			<div className="flex-1 text-gray-100 container mx-auto">{children}</div>
+		<div className="bg-gray-800 antialiased h-screen flex flex-col font-mono overflow-auto">
+			<Header />
+			<div className="flex-1 text-gray-100 container mx-auto p-4">{children}</div>
 		</div>
 	)
 }

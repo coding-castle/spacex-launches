@@ -9,10 +9,31 @@ query UpcomingLaunches {
 		dateUnix
 		dateLocal
 		details
+		cores {
+			flight
+			reused
+			landingAttempt
+			landingType
+		}
+		payloads
 	}
 	rockets @rest(type: "Rocket", path: "rockets") {
 		id
 		name
 		type
+	}
+	payloads @rest(type: "Payload", path: "payloads") {
+		id
+		name
+		type
+		reused
+		launch
+		customers
+		nationalities
+		massKg
+		orbit
+		dragon {
+			capsule
+		}
 	}
 }

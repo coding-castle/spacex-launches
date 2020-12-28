@@ -349,10 +349,21 @@ export type UpcomingLaunchesQuery = (
   { __typename?: 'Query' }
   & { upcomingLaunches: Array<(
     { __typename?: 'Launch' }
-    & Pick<Launch, 'id' | 'name' | 'flightNumber' | 'datePrecision' | 'rocket' | 'dateUtc' | 'dateUnix' | 'dateLocal' | 'details'>
+    & Pick<Launch, 'id' | 'name' | 'flightNumber' | 'datePrecision' | 'rocket' | 'dateUtc' | 'dateUnix' | 'dateLocal' | 'details' | 'payloads'>
+    & { cores: Array<(
+      { __typename?: 'Core' }
+      & Pick<Core, 'flight' | 'reused' | 'landingAttempt' | 'landingType'>
+    )> }
   )>, rockets: Array<(
     { __typename?: 'Rocket' }
     & Pick<Rocket, 'id' | 'name' | 'type'>
+  )>, payloads: Array<(
+    { __typename?: 'Payload' }
+    & Pick<Payload, 'id' | 'name' | 'type' | 'reused' | 'launch' | 'customers' | 'nationalities' | 'massKg' | 'orbit'>
+    & { dragon?: Maybe<(
+      { __typename?: 'Dragon' }
+      & Pick<Dragon, 'capsule'>
+    )> }
   )> }
 );
 
@@ -369,11 +380,32 @@ export const UpcomingLaunchesDocument = gql`
     dateUnix
     dateLocal
     details
+    cores {
+      flight
+      reused
+      landingAttempt
+      landingType
+    }
+    payloads
   }
   rockets @rest(type: "Rocket", path: "rockets") {
     id
     name
     type
+  }
+  payloads @rest(type: "Payload", path: "payloads") {
+    id
+    name
+    type
+    reused
+    launch
+    customers
+    nationalities
+    massKg
+    orbit
+    dragon {
+      capsule
+    }
   }
 }
     `;
