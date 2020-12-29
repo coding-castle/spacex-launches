@@ -24,7 +24,6 @@ export default function LaunchCard({ variant, index, className }: Props) {
 	const launch = data?.upcomingLaunches[index]!
 	const rocket = data?.rockets.find((r) => r.id === launch.rocket)
 	const payload = data?.payloads.find((p) => p.id === launch.payloads?.[0]!)
-	payload?.dragon?.capsule
 
 	let date: string
 	if (launch.datePrecision === Precision.Hour) {
@@ -52,7 +51,6 @@ export default function LaunchCard({ variant, index, className }: Props) {
 			<div className="grid gap-4 flex-1">
 				<div className="flex flex-col">
 					<h2 className="text-xl font-bold">{launch.name}</h2>
-					<div>Dragon: {payload?.dragon?.capsule}</div>
 					<div
 						className={clsx(
 							"flex-1",
