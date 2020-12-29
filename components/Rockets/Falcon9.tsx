@@ -6,7 +6,6 @@ type Props = {
 
 export default function Falcon9({ className }: Props) {
 	return (
-		// <svg xmlns="http://www.w3.org/2000/svg" className={clsx("w-full h-full overflow-visible")}>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			className={clsx("overflow-visible", className)}
@@ -17,6 +16,5 @@ export default function Falcon9({ className }: Props) {
 			<use href="/graphics.svg#block5"></use>
 			<use href="/graphics.svg#farings"></use>
 		</svg>
-		// </svg>
 	)
 }
