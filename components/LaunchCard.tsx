@@ -1,6 +1,7 @@
 import {
 	faCircleNotch,
 	faPlaneArrival,
+	faRecycle,
 	faRocket,
 	faSatellite,
 	faWeightHanging,
@@ -42,8 +43,8 @@ export default function LaunchCard({ variant, index, className }: Props) {
 	return (
 		<div
 			className={clsx(
-				variant === "wide" ? "h-80 bg-blue-500" : "h-52 bg-blue-900",
-				"bg-gray-900 w-full h-52 rounded flex flex-row space-x-4 cursor-pointer transition-transform p-8 shadow",
+				variant === "wide" ? "bg-blue-500" : "bg-blue-900",
+				"bg-gray-900 w-full rounded flex flex-row space-x-4 cursor-pointer transition-transform p-8 shadow",
 				className,
 			)}
 		>
@@ -77,8 +78,11 @@ export default function LaunchCard({ variant, index, className }: Props) {
 										: "No Landing Attempt"}
 								</div>
 								<div>
-									<FontAwesomeIcon fixedWidth icon={faRocket} />{" "}
+									<FontAwesomeIcon fixedWidth icon={faRecycle} />{" "}
 									{launch?.cores[0].reused ? "Reused Booster" : "New Booster"}
+								</div>
+								<div className="block md:hidden">
+									<FontAwesomeIcon fixedWidth icon={faRocket} /> {rocket?.name}
 								</div>
 							</>
 						)}
@@ -89,7 +93,14 @@ export default function LaunchCard({ variant, index, className }: Props) {
 				</div>
 				{/* <div className="flex flex-col">Second Col</div> */}
 			</div>
-			<Rocket type={rocket?.name!} />
+			<div
+				className={clsx(
+					variant === "wide" ? "hidden md:flex h-60" : "flex h-44",
+					"self-center",
+				)}
+			>
+				<Rocket type={rocket?.name!} />
+			</div>
 		</div>
 	)
 }

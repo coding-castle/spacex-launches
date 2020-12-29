@@ -30,7 +30,7 @@ export default function Index() {
 				<meta name="twitter:creator" content="" key="twhandle" />
 			</Head>
 			{/* Hero Card */}
-			<h1 className="font-extrabold my-10 text-4xl sm:text-6xl lg:text-7xl tracking-tight">
+			<h1 className="font-extrabold mb-10 mt-4 sm:mt-10 text-4xl sm:text-6xl lg:text-7xl tracking-tight">
 				Next Launch in {nextLaunchIn}
 			</h1>
 			<LaunchCard variant="wide" index={0} />
