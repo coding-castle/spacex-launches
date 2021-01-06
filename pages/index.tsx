@@ -16,7 +16,7 @@ export default function Index() {
 	if (loading) return <div>Loading</div>
 
 	let nextLaunchString: string
-	let nextLaunchIndex: number
+	let nextLaunchIndex = -1
 
 	const nextLaunchHourIndex = data!.upcomingLaunches.findIndex(
 		(l) => l.datePrecision === Precision.Hour,
@@ -67,7 +67,7 @@ export default function Index() {
 				<meta name="twitter:creator" content="@patrickgoeler" key="twhandle" />
 			</Head>
 			{/* Hero Card */}
-			{nextLaunchIndex! && (
+			{nextLaunchIndex > -1 && (
 				<>
 					<h1 className="font-extrabold mb-1 mt-4 sm:mt-10 text-4xl sm:text-6xl lg:text-7xl tracking-tight">
 						{nextLaunchString}
