@@ -5,10 +5,12 @@ import "tailwindcss/tailwind.css"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { useApollo } from "../lib/ApolloClient"
 import Head from "next/head"
+import { useAnalytics } from "../lib/analytics"
 
 config.autoAddCss = false
 
 export default function App({ Component, pageProps }: AppProps) {
+	useAnalytics()
 	const apolloClient = useApollo(pageProps)
 	const getLayout = (Component as any).getLayout || ((page: any) => page)
 	return (
