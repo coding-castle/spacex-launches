@@ -95,11 +95,11 @@ export default function LaunchCard({ variant, index, className }: Props) {
 			</div>
 			<div
 				className={clsx(
-					variant === "wide" ? "hidden md:flex h-60" : "flex h-44",
-					"self-center",
+					variant === "wide" ? "hidden md:flex" : "flex",
+					"self-center overflow-hidden",
 				)}
 			>
-				<Rocket type={rocket?.name!} />
+				<Rocket variant={variant} type={rocket?.name!} />
 			</div>
 		</div>
 	)
